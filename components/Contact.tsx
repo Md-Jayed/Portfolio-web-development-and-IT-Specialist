@@ -13,8 +13,10 @@ const Contact: React.FC = () => {
 
     const formData = new FormData(e.currentTarget);
     
-    // Web3Forms access key
-    formData.append('access_key', 'bf2d4141-b91b-4a7e-a5f9-ec496e9d8fec');
+    // Access key from environment variable (Netlify)
+    // Use process.env as it is expected to be available in this environment
+    const accessKey = (process.env as any).VITE_WEB3FORMS_KEY || 'bf2d4141-b91b-4a7e-a5f9-ec496e9d8fec';
+    formData.append('access_key', accessKey);
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
